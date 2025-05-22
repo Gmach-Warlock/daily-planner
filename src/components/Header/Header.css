@@ -1,7 +1,11 @@
 header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     height: 6rem;
     color: white;
     background-color: black;
+    padding-inline: 3rem;
 }
 
 header li {
