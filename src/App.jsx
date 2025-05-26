@@ -1,24 +1,28 @@
-import { useState } from 'react'
+import { useState, createContext } from 'react'
 import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from 'react-router'
 import './App.css';
 import Root from './Root';
 import Contacts from './components/Contacts/Contacts';
 import Planner from './components/Appointments/Planner';
 
+const contactsContext = createContext();
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [contacts, setContacts] = useState([])
 
   const router = createBrowserRouter(createRoutesFromElements(
     <Route path='/' element={ <Root/> }>
-      <Route path='contacts' element={ <Contacts/> } />
+      <Route path='contacts' element={ <Contacts/> }>
+        
+      </Route>
       <Route path='planner' element={ <Planner/> } />
     </Route>
   ));
 
   return (
-    <>
+    <contactsContext.Provider value={contacts}>
       <RouterProvider router={ router } />
-    </>
+    </contactsContext.Provider>
   )
 }
 

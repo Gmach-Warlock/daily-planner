@@ -7,7 +7,6 @@ export default function Root() {
             <Header />
             <main>
                 <Outlet />
-                <h1>Testing</h1>
             </main>
         </>
     );
