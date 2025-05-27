@@ -20,18 +20,12 @@ const callEditForm = () => {
     setEditingContact(true);
 }
 
-const deleteContact = (contact) => {
+const deleteContact = (id) => {
 
+    console.log(contacts)
+    console.log(id)
     
-
-    if (contacts.some((contact) => contact.first_name === props.first_name && 
-    contact.last_name === props.last_name && contact.address === props.address && 
-    contact.company === props.company && contact.groups === props.groups)) {
-        console.log(contact)
-        console.log(props.first_name)
-        
-    } 
-
+    setContacts(() => contacts.filter(contact => contact.id === id))
 
     setEditingContact(false);
 
@@ -47,7 +41,7 @@ const deleteContact = (contact) => {
             <span>{props.company}</span><br />
             <span>{props.groups}</span><br />
             {editingContact === false && <button onClick={callEditForm}>Edit</button>}
-            <button onClick={deleteContact}>Delete</button>
+            <button onClick={() => deleteContact(props.id)}>Delete</button>
 
         </div> : 
 

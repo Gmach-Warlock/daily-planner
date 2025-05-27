@@ -1,4 +1,4 @@
-import { useState, createContext } from 'react'
+import { useState, createContext, useEffect } from 'react'
 import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from 'react-router'
 import './App.css';
 import Root from './Root';
@@ -9,9 +9,17 @@ export const contactsContext = createContext();
 export const creatingContactContext = createContext();
 
 function App() {
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState(() => {
+    const localValue = localStorage.getItem("contacts");
+    if (localValue == null) return []
+    return JSON.parse(localValue);
+  });
 
   const [creatingContact, setCreatingContact] = useState(false)
+
+  useEffect(() => {
+    localStorage.setItem("contacts", JSON.stringify(contacts))
+  }, [contacts])
  
   // createContact
 

@@ -13,7 +13,7 @@ export default function TileList() {
     return (
         <>
             <ul>
-                {contacts.map((contact) => <li key={`${contact.first_name}${contact.last_name}`}>
+                {contacts.map((contact) => <li key={`${contact.first_name}${contact.last_name}${contact.phone_number}`}>
                     <Tile 
                         first_name={contact.first_name} 
                         last_name={contact.last_name} 
@@ -21,6 +21,7 @@ export default function TileList() {
                         phone_number={contact.phone_number}
                         company={contact.company} 
                         groups={contact.groups} 
+                        id={`${contact.first_name}${contact.last_name}`}
                     /><br/>
                 </li>)}
             </ul>
