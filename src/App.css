@@ -8,5 +8,10 @@
 
 body {
   font-size: 1.5rem;
+  background-color: white;
+  color: black;
 }
 
+li {
+  list-style-type: none;
+}

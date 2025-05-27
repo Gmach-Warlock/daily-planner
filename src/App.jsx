@@ -5,14 +5,27 @@ import Root from './Root';
 import Contacts from './components/Contacts/Contacts';
 import Planner from './components/Appointments/Planner';
 
-const contactsContext = createContext();
+export const contactsContext = createContext();
+export const creatingContactContext = createContext();
 
 function App() {
-  const [contacts, setContacts] = useState([])
+  const [contacts, setContacts] = useState([]);
+
+  const [creatingContact, setCreatingContact] = useState(false)
+ 
+  // createContact
+
+  const createContact = () => {
+    
+  }
+
+  // create browserBrowserRouter
 
   const router = createBrowserRouter(createRoutesFromElements(
     <Route path='/' element={ <Root/> }>
-      <Route path='contacts' element={ <Contacts/> }>
+      <Route path='contacts' element={ <Contacts
+        contacts={contacts}
+      /> }>
         
       </Route>
       <Route path='planner' element={ <Planner/> } />
@@ -20,9 +33,14 @@ function App() {
   ));
 
   return (
-    <contactsContext.Provider value={contacts}>
-      <RouterProvider router={ router } />
-    </contactsContext.Provider>
+    <>
+      <creatingContactContext.Provider value={[creatingContact, setCreatingContact]}>
+        <contactsContext.Provider value={[contacts, setContacts]}>
+          <RouterProvider router={ router } />
+        </contactsContext.Provider>
+      </creatingContactContext.Provider>
+      <h1></h1>
+    </>
   )
 }
 

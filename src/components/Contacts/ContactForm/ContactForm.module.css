@@ -1,0 +1,10 @@
+.ContactForm {
+    padding-bottom: 2rem;
+    background-color: white;
+    columns: black;
+}
+
+.buttonCreateNewContact {
+    background-color: black;
+    color: white;
+}
