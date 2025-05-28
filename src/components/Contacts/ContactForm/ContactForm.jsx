@@ -1,13 +1,12 @@
 import { useState, useContext, useEffect } from 'react';
-import { contactsContext, creatingContactContext } from '../../../App';
+import { contactsContext } from '../../../App';
 import './ContactForm.css'
 
 export default function ContactForm() {
 
     const [contacts, setContacts] = useContext(contactsContext);
-    const [creatingContact, setCreatingContact] = useContext(creatingContactContext);
     const [nameInputData, setNameInputData] = useState('');
-    const [emailInputData, setEmailInputData] = useState()
+    const [emailInputData, setEmailInputData] = useState('')
     const [phoneNumberInputData, setPhoneNumberInputData] = useState('');
 
     const handleClick = () => {
@@ -34,11 +33,7 @@ export default function ContactForm() {
         }
     }
 
-    useEffect(() => {
-        setNameInputData('');
-        setEmailInputData('');
-        setPhoneNumberInputData('');
-    }, [contacts])
+
 
     return (
         <div className="new-contact-form">
@@ -48,11 +43,13 @@ export default function ContactForm() {
                 type="text" 
                 name="new-contact-name-input" 
                 id="new-contact-name-input" 
+                value={nameInputData}
                 onChange={e => {
                     return setNameInputData(e.target.value);
                 }}
                 required 
-                placeholder='Enter your Full Name'
+                placeholder='Enter your Full Name' 
+                aria-label='Contact Name'
             /> <br />
             <label 
                 htmlFor="new-contact-name-input" 
@@ -60,23 +57,26 @@ export default function ContactForm() {
             >Name</label><br />
 
             <input 
-                type="text" 
+                type="email" 
                 name="new-contact-email-input" 
                 id="new-contact-email-input" 
+                value={emailInputData}
                 onChange={e => {
                     return setEmailInputData(e.target.value);
                 }}
                 required 
-                placeholder='Enter your Email'
+                placeholder='Enter your Email' 
+                aria-label='Contact Email'
             /><br />
             <label 
                 htmlFor="new-contact-address-input"
             >Email</label><br />
 
             <input 
-                type="text" 
+                type="tel" 
                 name="new-contact-phone_number-input" 
                 id="new-contact-phone_number-input" 
+                value={phoneNumberInputData}
                 onChange={e => {
                     return setPhoneNumberInputData(e.target.value);
                 }}

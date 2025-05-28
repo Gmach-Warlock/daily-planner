@@ -1,21 +1,31 @@
-import { useState, useContext } from 'react';
-import { appointmentsContext, creatingAppoinmentContext } from '../../../App';
+import { useState, useContext, useMemo } from 'react';
+import { appointmentsContext } from '../../../App';
 import './AppointmentForm.css';
 import { contactsContext } from '../../../App';
+import { DropdownContacts } from '../../DropdownContacts/DropdownContacts';
 
 export default function AppointmentForm() {
 
     // state variables
 
     const [appointments, setAppointments] = useContext(appointmentsContext);
-    const [creatingAppoinment, setCreatingAppointment] = useContext(creatingAppoinmentContext);
     const [contacts, setContacts] = useContext(contactsContext);
     const [nameData, setNameData] = useState('');
     const [contactData, setContactData] = useState('');
     const [dateData, setDateData] = useState('');
     const [timeData, setTimeData] = useState('');
 
+    const getTodayString = () => {
+    const [month, day, year] = new Date()
+        .toLocaleDateString("en-US")
+        .split("/");
+    return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+    };
 
+
+    const contactNames = useMemo(() => {
+        return contacts.map((contact) => contact.name);
+    }, [contacts]);
 
     const createAppointment = () => {
 
@@ -25,7 +35,6 @@ export default function AppointmentForm() {
             date: dateData, 
             time: timeData
         }]);
-        setCreatingAppointment(false);
     }
 
     return (
@@ -39,24 +48,27 @@ export default function AppointmentForm() {
             /><br />
             <label htmlFor="new-appointment-name-input">Name</label><br />
 
-            <input 
-                type="text" 
-                id="new-appointment-contact-input" 
-                name="new-appointment-contact-input" 
+
+            <DropdownContacts 
+                name="contact"
+                value={contactData}
+                contacts={contactNames}
                 onChange={(e) => setContactData(e.target.value)}
-            /><br />
+            />
+
             <label htmlFor="new-appointment-contact-input">Contact</label><br />
 
             <input 
-                type="text" 
+                type="date" 
                 id="new-appointment-date-input" 
                 name="new-appointment-date-input" 
+                min={getTodayString()}
                 onChange={(e) => setDateData(e.target.value)}
             /><br />
             <label htmlFor="new-appointment-date-input">Date</label><br />
 
             <input 
-                type="text" 
+                type="time" 
                 id="new-appointment-time-input" 
                 name="new-appointment-time-input" 
                 onChange={(e) => setTimeData(e.target.value)}

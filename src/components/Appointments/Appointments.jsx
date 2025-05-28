@@ -1,5 +1,4 @@
 import { useState, useContext } from "react";
-import { creatingAppoinmentContext } from "../../App";
 import AppointmentForm from "./AppointmentForm/AppointmentForm";
 
 
@@ -7,7 +6,6 @@ export default function Appointments() {
 
     // state variables
 
-    const [creatingAppoinment, setCreatingAppointment] = useContext(creatingAppoinmentContext);
 
     const callAppointmentForm = () => {
         setCreatingAppointment(true);
@@ -19,7 +17,7 @@ export default function Appointments() {
             <div className="appointments-container">
                 <AppointmentForm />
             </div>
-            {creatingAppoinment === false && <button onClick={callAppointmentForm}>Add Appointment</button>}
+            <button onClick={callAppointmentForm}>Add Appointment</button>
         </>    
     );
 }
