@@ -2,7 +2,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 6rem;
+    height: 4rem;
     color: white;
     background-color: black;
     padding-inline: 3rem;
@@ -13,10 +13,18 @@ header li {
     padding-inline: .25rem;
 }
 
-header li:hover {
+header a {
+    color: white;
+}
+
+header a:hover {
     color: yellow;
 }
 
-header li:active {
+header a:active {
+    color: purple;
+}
+
+header .active {
     color: blue;
 }

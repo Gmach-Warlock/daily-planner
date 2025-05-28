@@ -3,9 +3,9 @@ import ContactForm from "./ContactForm/ContactForm";
 import TileList from "./TileList/TileList";
 import { contactsContext } from "../../App";
 import { creatingContactContext } from "../../App";
-import styles from './Contacts.module.css';
+import './Contacts.css'
 
-export default function Contacts(props) {
+export default function Contacts() {
 
     const {contacts, setContacts } = useContext(contactsContext)
     const [creatingContact, setCreatingContact] = useContext(creatingContactContext);
@@ -20,11 +20,11 @@ export default function Contacts(props) {
     }
 
     return (
-        <div className={styles.Contacts}>
+        <div className="contacts-section">
             <h2>Contacts</h2>
-            <div className="contacts-container">
-                {creatingContact ? <ContactForm /> : <TileList 
-                />}
+            <div className="flex-column">
+                <ContactForm />
+                <TileList />
             </div>
             {creatingContact === false && <button onClick={handleClick}>Create New Contact</button>}
         </div>

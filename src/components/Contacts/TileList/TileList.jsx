@@ -1,4 +1,5 @@
 import Tile from "./Tile/Tile";
+import './TileList.css'
 import { useContext, useState } from "react";
 import { contactsContext } from "../../../App";
 
@@ -11,21 +12,18 @@ export default function TileList() {
     }
 
     return (
-        <>
-            <ul>
-                {contacts.map((contact) => <li key={`${contact.first_name}${contact.last_name}${contact.phone_number}`}>
+        <div className="contact">
+            <ul className="contacts-container">
+                {contacts.map((contact) => <li key={`${contact.first_name}${contact.last_name}${contact.phone_number}`} className="contact-tile">
                     <Tile 
-                        first_name={contact.first_name} 
-                        last_name={contact.last_name} 
-                        address={contact.address} 
+                        name={contact.name} 
+                        email={contact.email}
                         phone_number={contact.phone_number}
-                        company={contact.company} 
-                        groups={contact.groups} 
-                        id={`${contact.first_name}${contact.last_name}`}
+                        id={contact.id}
                     /><br/>
                 </li>)}
             </ul>
 
-        </>
+        </div>
     );
 }

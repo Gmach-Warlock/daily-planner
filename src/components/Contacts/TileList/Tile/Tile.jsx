@@ -1,45 +1,65 @@
 import { contactsContext } from "../../../../App";
 import { useState, useContext } from "react";
-
+import './Tile.css'
 
 export default function Tile(props) {
 
-// state variables
-    
-const [contacts, setContacts] = useContext(contactsContext);
-const [editingContact, setEditingContact] = useState(false);
-const [firstNameData, setFirstNameData] = useState('');
-const [lastNameData, setLastNameData] = useState('');
-const [addressData, setAddressData] = useState('');
-const [phoneNumberData, setPhoneNumberData] = useState('');
-const [companyData, setCompanyData] = useState('');
-const [groupsData, setGroupsData] = useState([]);
+    // state variables
+        
+    const [contacts, setContacts] = useContext(contactsContext);
+    const [editingContact, setEditingContact] = useState(false);
+    const [firstNameData, setFirstNameData] = useState('');
+    const [lastNameData, setLastNameData] = useState('');
+    const [emailData, setEmailData] = useState('')
+    const [addressData, setAddressData] = useState('');
+    const [phoneNumberData, setPhoneNumberData] = useState('');
+    const [companyData, setCompanyData] = useState('');
+    const [groupsData, setGroupsData] = useState([]);
 
+    // callEditForm function displays the form for editing a contact
 
-const callEditForm = () => {
-    setEditingContact(true);
-}
+    const callEditForm = () => {
+        setEditingContact(true);
+    }
 
-const deleteContact = (id) => {
+    const editContact = (id) => {
+        const indexOfContactToEdit = contacts.findIndex(c => c.id === id);
 
-    console.log(contacts)
-    console.log(id)
-    
-    setContacts(() => contacts.filter(contact => contact.id === id))
+        const editedContact = {
+            first_name: firstNameData, 
+            last_name: lastNameData, 
+            email: emailData, 
+            address: addressData, 
+            phone_number: phoneNumberData, 
+            company: companyData, 
+            groups: groupsData, 
+            id: `${firstNameData}${lastNameData}${contacts.length}`
+        }
+        console.log(props.id)
+        console.log(editedContact)
+        console.log(indexOfContactToEdit)
+        setContacts(() => contacts.filter(c => c.id != id))
 
-    setEditingContact(false);
+        setEditingContact(false)
+    }
 
-}
+    // deleteContact 
+
+    const deleteContact = (id) => {
+        
+        setContacts(() => contacts.filter(c => c.id !== id))
+
+        setEditingContact(false);
+
+    }
     
  return (
-    <>
+    <div className="tile">
         {editingContact === false ? <div>
             
-            <h3>{`${props.first_name} ${props.last_name}`}</h3>
-            <span>{props.address}</span><br />
+            <h3>{props.name}</h3>
+            <span>{props.email}</span><br />
             <span>{props.phone_number}</span><br />
-            <span>{props.company}</span><br />
-            <span>{props.groups}</span><br />
             {editingContact === false && <button onClick={callEditForm}>Edit</button>}
             <button onClick={() => deleteContact(props.id)}>Delete</button>
 
@@ -49,8 +69,8 @@ const deleteContact = (id) => {
 
             <input 
                 type="text" 
-                name="new-contact-first-name-input" 
-                id="new-contact-name-input" 
+                name="edit-contact-first-name-input" 
+                id="edit-contact-name-input" 
                 onChange={e => {
                     return setFirstNameData(e.target.value);
                 }}
@@ -63,32 +83,32 @@ const deleteContact = (id) => {
 
             <input 
                 type="text" 
-                name="new-contact-last-name-input" 
-                id="new-contact-last-name-input" 
+                name="edit-contact-last-name-input" 
+                id="edit-contact-last-name-input" 
                 onChange={e => {
                     return setLastNameData(e.target.value);
                 }}    
             /><br />
             <label 
-                htmlFor="new-contact-last-name-input"
+                htmlFor="edit-contact-last-name-input"
             >Last Name</label><br />
 
             <input 
                 type="text" 
-                name="new-contact-address-input" 
-                id="new-contact-address-input" 
+                name="edit-contact-email-input" 
+                id="edit-contact-address-input" 
                 onChange={e => {
-                    return setAddressData(e.target.value);
+                    return setEmailData(e.target.value);
                 }}
             /><br />
             <label 
-                htmlFor="new-contact-address-input"
-            >Address</label><br />
+                htmlFor="edit-contact-email-input"
+            >Email</label><br />
 
             <input 
                 type="text" 
-                name="new-contact-phone_number-input" 
-                id="new-contact-phone_number-input" 
+                name="edit-contact-phone_number-input" 
+                id="edit-contact-phone_number-input" 
                 onChange={e => {
                     return setPhoneNumberData(e.target.value);
                 }}
@@ -99,30 +119,42 @@ const deleteContact = (id) => {
 
             <input 
                 type="text" 
-                name="new-contact-company-input" 
-                id="new-contact-company-input" 
+                name="edit-contact-address-input" 
+                id="edit-contact-address-input" 
+                onChange={e => {
+                    return setAddressData(e.target.value);
+                }}
+            /><br />
+            <label 
+                htmlFor="edit-contact-address-input"
+            >Address</label><br />
+
+            <input 
+                type="text" 
+                name="edit-contact-company-input" 
+                id="edit-contact-company-input" 
                 onChange={e => {
                     return setCompanyData(e.target.value);
                 }}
             /><br />
             <label 
-                htmlFor="new-contact-company-input"
+                htmlFor="edit-contact-company-input"
             >Company</label><br />
 
             <input 
                 type="text" 
-                name="new-contact-groups-input" 
-                id="new-contact-groups-input" 
+                name="edit-contact-groups-input" 
+                id="edit-contact-groups-input" 
                 onChange={e => {
                     return setGroupsData(e.target.value);
                 }}
             /><br />
             <label 
-                htmlFor="new-contact-groups-input"
+                htmlFor="edit-contact-groups-input"
             >Groups</label><br />
 
             <button 
-                onClick={editContact}
+                onClick={() => editContact(props.id)}
             >Update</button>
 
 
@@ -130,7 +162,7 @@ const deleteContact = (id) => {
 
         } 
 
-    </>
+    </div>
 
         
  );

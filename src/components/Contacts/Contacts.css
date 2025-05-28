@@ -1,0 +1,8 @@
+.contacts-section {
+    padding-bottom: 2rem;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}

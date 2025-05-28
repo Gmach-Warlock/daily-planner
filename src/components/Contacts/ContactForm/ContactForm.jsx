@@ -1,79 +1,77 @@
-import styles from './ContactForm.module.css'
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { contactsContext, creatingContactContext } from '../../../App';
-
+import './ContactForm.css'
 
 export default function ContactForm() {
 
+    const [contacts, setContacts] = useContext(contactsContext);
     const [creatingContact, setCreatingContact] = useContext(creatingContactContext);
-    const [firstNameInputData, setFirstNameInputData] = useState('');
-    const [lastNameInputData, setLastNameInputData] = useState('');
-    const [addressInputData, setAddressInputData] = useState('');
+    const [nameInputData, setNameInputData] = useState('');
+    const [emailInputData, setEmailInputData] = useState()
     const [phoneNumberInputData, setPhoneNumberInputData] = useState('');
-    const [companyInputData, setCompanyInputData] = useState('');
-    const [groupsInputData, setGroupsInputData] = useState([]);
-    const [contacts, setContacts] = useContext(contactsContext)
 
     const handleClick = () => {
-        if (firstNameInputData && firstNameInputData.trim().length > 1) {
+        if (nameInputData && nameInputData.trim().length > 1) {
 
             setContacts((prevState) => [...prevState, {
-                first_name: firstNameInputData, 
-                last_name: lastNameInputData, 
-                address: addressInputData, 
+                name: nameInputData, 
+                email: emailInputData, 
                 phone_number: phoneNumberInputData, 
-                company: companyInputData, 
-                groups: groupsInputData
+                id: `${nameInputData}${emailInputData}${phoneNumberInputData}`
             }])
 
             setCreatingContact(false);
+            setNameInputData('');
+            setEmailInputData('');
+            setPhoneNumberInputData('');
+
+            
+            console.log(emailInputData);
 
             console.log(contacts)
-            } else {
-                alert('Please fill out the required information!')
-            }
+        } else {
+            alert('Please fill out the required information!')
+        }
     }
 
-    return (
-        <div className={styles.ContactForm}>
+    useEffect(() => {
+        setNameInputData('');
+        setEmailInputData('');
+        setPhoneNumberInputData('');
+    }, [contacts])
 
+    return (
+        <div className="new-contact-form">
+
+                
             <input 
                 type="text" 
-                name="new-contact-first-name-input" 
+                name="new-contact-name-input" 
                 id="new-contact-name-input" 
                 onChange={e => {
-                    return setFirstNameInputData(e.target.value);
+                    return setNameInputData(e.target.value);
                 }}
-                required
+                required 
+                placeholder='Enter your Full Name'
             /> <br />
             <label 
                 htmlFor="new-contact-name-input" 
 
-            >First Name</label><br />
+            >Name</label><br />
 
             <input 
                 type="text" 
-                name="new-contact-last-name-input" 
-                id="new-contact-last-name-input" 
+                name="new-contact-email-input" 
+                id="new-contact-email-input" 
                 onChange={e => {
-                    return setLastNameInputData(e.target.value);
-                }}    
-            /><br />
-            <label 
-                htmlFor="new-contact-last-name-input"
-            >Last Name</label><br />
-
-            <input 
-                type="text" 
-                name="new-contact-address-input" 
-                id="new-contact-address-input" 
-                onChange={e => {
-                    return setAddressInputData(e.target.value);
+                    return setEmailInputData(e.target.value);
                 }}
+                required 
+                placeholder='Enter your Email'
             /><br />
             <label 
                 htmlFor="new-contact-address-input"
-            >Address</label><br />
+            >Email</label><br />
 
             <input 
                 type="text" 
@@ -82,37 +80,19 @@ export default function ContactForm() {
                 onChange={e => {
                     return setPhoneNumberInputData(e.target.value);
                 }}
+                required
+                // regex is for US phone numbers
+                pattern="[1-9][0-9]{2}-[1-9][0-9]{2}-[0-9]{4}"
+                placeholder="Phone (###-###-####)"
+                aria-label="Contact Phone"
             /><br />
             <label 
                 htmlFor="new-contact-phone_number-input"
             >Phone Number</label><br />
 
-            <input 
-                type="text" 
-                name="new-contact-company-input" 
-                id="new-contact-company-input" 
-                onChange={e => {
-                    return setCompanyInputData(e.target.value);
-                }}
-            /><br />
-            <label 
-                htmlFor="new-contact-company-input"
-            >Company</label><br />
-
-            <input 
-                type="text" 
-                name="new-contact-groups-input" 
-                id="new-contact-groups-input" 
-                onChange={e => {
-                    return setGroupsInputData(e.target.value);
-                }}
-            /><br />
-            <label 
-                htmlFor="new-contact-groups-input"
-            >Groups</label><br />
 
             <button 
-                className={styles.buttonCreateNewContact} 
+                className='button button-create-contact' 
                 onClick={handleClick}
             >Create Contact</button>
 
