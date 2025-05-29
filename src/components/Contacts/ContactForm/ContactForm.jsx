@@ -16,7 +16,6 @@ export default function ContactForm() {
                 name: nameInputData, 
                 email: emailInputData, 
                 phone_number: phoneNumberInputData, 
-                id: `${nameInputData}${emailInputData}${phoneNumberInputData}`
             }])
 
             setNameInputData('');

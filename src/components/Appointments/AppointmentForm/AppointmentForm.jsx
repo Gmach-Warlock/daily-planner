@@ -35,6 +35,14 @@ export default function AppointmentForm() {
             date: dateData, 
             time: timeData
         }]);
+
+        setNameData('');
+        setContactData('');
+        setDateData('');
+        setTimeData('');
+
+
+
         console.log(appointments)
     }
 
@@ -45,6 +53,7 @@ export default function AppointmentForm() {
                 type="text" 
                 id="new-appointment-name-input" 
                 name="new-appointment-name-input" 
+                value={nameData}
                 onChange={(e) => setNameData(e.target.value)}
             /><br />
             <label htmlFor="new-appointment-name-input">Name</label><br />
@@ -63,6 +72,7 @@ export default function AppointmentForm() {
                 type="date" 
                 id="new-appointment-date-input" 
                 name="new-appointment-date-input" 
+                value={dateData}
                 min={getTodayString()}
                 onChange={(e) => setDateData(e.target.value)}
             /><br />
@@ -72,6 +82,7 @@ export default function AppointmentForm() {
                 type="time" 
                 id="new-appointment-time-input" 
                 name="new-appointment-time-input" 
+                value={timeData}
                 onChange={(e) => setTimeData(e.target.value)}
             /><br />
             <label htmlFor="new-appointment-time-input">Time</label><br />

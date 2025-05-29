@@ -6,7 +6,7 @@ import './Contacts.css'
 
 export default function Contacts() {
 
-    const {contacts, setContacts } = useContext(contactsContext)
+    const [contacts, setContacts] = useContext(contactsContext)
 
     const handleClick = () => {
         if (creatingContact) {
@@ -23,7 +23,8 @@ export default function Contacts() {
             <div className="flex-column">
                 <ContactForm />
                 <TileList 
-                    array={contacts}
+                    arrayToIterate={contacts}
+                    test='test'
                 />
             </div>
         </div>
