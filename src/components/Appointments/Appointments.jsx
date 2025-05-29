@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import AppointmentForm from "./AppointmentForm/AppointmentForm";
+import TileList from "../Contacts/TileList/TileList";
 
 
 export default function Appointments() {
@@ -16,8 +17,8 @@ export default function Appointments() {
             <h2>Appointments</h2>
             <div className="appointments-container">
                 <AppointmentForm />
+
             </div>
-            <button onClick={callAppointmentForm}>Add Appointment</button>
         </>    
     );
 }

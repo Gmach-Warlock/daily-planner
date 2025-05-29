@@ -14,7 +14,9 @@ function App() {
 
   // state variables
 
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState([
+    {name: 'Seravego Majere', email: 'seravego@gmail.com', phone_number: 818-939-9169}
+  ]);
   const [appointments, setAppointments] = useState([]);
 
 

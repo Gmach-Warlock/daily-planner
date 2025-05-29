@@ -19,7 +19,6 @@ export default function ContactForm() {
                 id: `${nameInputData}${emailInputData}${phoneNumberInputData}`
             }])
 
-            setCreatingContact(false);
             setNameInputData('');
             setEmailInputData('');
             setPhoneNumberInputData('');

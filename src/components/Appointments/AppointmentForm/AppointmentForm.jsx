@@ -35,6 +35,7 @@ export default function AppointmentForm() {
             date: dateData, 
             time: timeData
         }]);
+        console.log(appointments)
     }
 
     return (

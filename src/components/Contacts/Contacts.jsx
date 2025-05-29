@@ -22,9 +22,10 @@ export default function Contacts() {
             <h2>Contacts</h2>
             <div className="flex-column">
                 <ContactForm />
-                <TileList />
+                <TileList 
+                    array={contacts}
+                />
             </div>
-            <button onClick={handleClick}>Create New Contact</button>
         </div>
 
     );
